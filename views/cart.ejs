@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cart Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <div class="max-w-6xl mx-auto py-8 px-4">
+    <h1 class="text-2xl font-bold mb-6">Your Shopping Cart</h1>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Cart Items -->
+      <div class="flex-1 space-y-4">
+        <% user.cart.forEach(function(product, index){ %>
+          <div class="flex flex-col sm:flex-row gap-4 border-b py-4 bg-white px-4 rounded-md shadow">
+            <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" class="w-24 h-24 object-cover rounded-md mx-auto sm:mx-0" />
+
+            <div class="flex-1">
+              <h3 class="text-gray-800 font-medium"><%= product.name %></h3>
+              <p class="text-sm text-gray-500">Seller: Animatedjewellery</p>
+
+              <div class="mt-2 flex flex-wrap gap-2 items-center">
+                <span class="text-lg font-bold text-gray-800">₹<%= product.price %></span>
+                <span class="text-sm line-through text-gray-400">₹<%= product.originalPrice || product.price * 2 %></span>
+                <span class="text-sm text-green-600 font-semibold">
+                  <%= product.discount || Math.floor((1 - (product.price / (product.originalPrice || product.price * 2))) * 100) %>% Off
+                </span>
+              </div>
+
+              <div class="flex items-center flex-wrap gap-4 mt-4">
+                <div class="flex items-center border px-2 py-1 rounded" data-price="<%= product.price %>">
+                  <button onclick="decreaseQty(<%= index %>)" class="px-2 text-xl">−</button>
+                  <span id="qty-<%= index %>" class="px-2">1</span>
+                  <button onclick="increaseQty(<%= index %>)" class="px-2 text-xl">+</button>
+                </div>
+                <button class="text-sm text-blue-500">SAVE FOR LATER</button>
+                <button class="text-sm text-red-500">REMOVE</button>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+
+      <!-- Price Summary -->
+      <div class="bg-white shadow-md rounded-md p-4 w-full lg:w-80">
+        <h2 class="text-lg font-semibold mb-4">PRICE DETAILS</h2>
+        <div class="flex justify-between text-sm mb-2">
+          <span>Total Items</span>
+          <span id="total-items"><%= user.cart.length %></span>
+        </div>
+        <div class="flex justify-between text-sm mb-2">
+          <span>Total Price</span>
+          <span>₹<span id="total-price">0</span></span>
+        </div>
+        <div class="flex justify-between text-sm mb-2">
+          <span>Delivery Charges</span>
+          <span class="text-green-600">FREE</span>
+        </div>
+        <hr class="my-2">
+        <div class="flex justify-between font-semibold">
+          <span>Amount Payable</span>
+          <span>₹<span id="amount-payable">0</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const productPrices = document.querySelectorAll("[data-price]");
+    let total = 0;
+
+    function updateTotal() {
+      total = 0;
+      productPrices.forEach((div, index) => {
+        const price = parseFloat(div.dataset.price);
+        const qty = parseInt(document.getElementById(`qty-${index}`).innerText);
+        total += price * qty;
+      });
+      document.getElementById("total-price").innerText = total;
+      document.getElementById("amount-payable").innerText = total;
+    }
+
+    function increaseQty(index) {
+      const qtyElement = document.getElementById(`qty-${index}`);
+      let qty = parseInt(qtyElement.innerText);
+      qtyElement.innerText = qty + 1;
+      updateTotal();
+    }
+
+    function decreaseQty(index) {
+      const qtyElement = document.getElementById(`qty-${index}`);
+      let qty = parseInt(qtyElement.innerText);
+      if (qty > 1) {
+        qtyElement.innerText = qty - 1;
+        updateTotal();
+      }
+    }
+
+    // On load
+    updateTotal();
+  </script>
+</body>
+</html>

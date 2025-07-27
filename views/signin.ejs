@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-4">
+
+  <div class="w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
+    
+    <div class="w-full md:w-1/2 p-8 sm:p-10">
+      <h1 class="text-3xl font-bold mb-4 text-gray-800">Sign in</h1>
+      <p class="text-gray-600 mb-6 text-sm">Create an account to start posting jobs and build your remote team.</p>
+
+      <!-- Google Sign-in -->
+      <button class="w-full flex items-center justify-center py-2 mb-6 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-100 transition text-sm">
+        <img src="https://img.icons8.com/color/16/google-logo.png" class="mr-2"/>
+        Sign in with Google
+      </button>
+
+      <p class="text-gray-400 text-center text-sm mb-4">or sign in using email</p>
+
+      <form class="space-y-4" method="post" action="/users/login">
+        
+        <input name="email" type="email" placeholder="Email" class="w-full px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"/>
+        
+        <input name="password" type="password" placeholder="Password" class="w-full px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"/>
+        
+      
+
+        <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-md font-semibold text-sm">sign in</button>
+      </form>
+
+      <p class="mt-6 text-xs text-gray-600 text-center">
+        froget password
+        <a href="/shop" class="text-purple-600 hover:underline">Sign up</a>
+      </p>
+    </div>
+
+    <div class="hidden md:block md:w-1/2  bg-gradient-to-br from-purple-600 to-indigo-700 z-10 flex justify-start">
+      <img src="/images/zipper.png" alt="" class=" h-[100%] w-[288px] z-20  ml-[-28%] overflow-hidden " >
+    </div>
+  </div>
+
+</body>
+</html>

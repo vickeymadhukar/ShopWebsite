@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Create New Product</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gray-50 flex flex-col lg:flex-row">
+
+
+<% if (typeof success !== 'undefined' && success.length > 0) { %>
+  <div id="success-alert" class="absolute w-1/2 top-[10%] bg-green-50 border border-green-200 text-green-800 text-sm font-medium px-6 py-4 rounded-md shadow-md flex items-center justify-between mt-4 mx-6 transition-opacity duration-500">
+    <div class="flex items-center justify-center space-x-3">
+      <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+      <span><%= success %></span>
+    </div>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      const alert = document.getElementById('success-alert');
+      if (alert) {
+        alert.style.opacity = '0';
+        setTimeout(() => alert.remove(), 500); // Remove after fade-out
+      }
+    }, 3000); // Display for 3 seconds
+  </script>
+<% } %>
+
+
+  <!-- Sidebar -->
+  <aside class="w-full lg:w-64 bg-white shadow-md p-4">
+    <nav class="flex flex-col space-y-4 text-sm">
+      <a href="/shop" class="text-gray-700 hover:text-black">All Products</a>
+      <a href="#" class="text-gray-700 hover:text-black">Create new product</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6 sm:p-10">
+    <h1 class="text-xl sm:text-2xl font-semibold mb-6">Create New Product</h1>
+
+    <form class="space-y-8" action="/products/create"  method="post"  enctype="multipart/form-data">
+      <!-- Product Details -->
+      <section>
+        <h2 class="text-lg font-medium mb-4">Product Details</h2>
+
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Product Image</label>
+          <input type="file" name="image" class="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input type="text" name="name" placeholder="Product Name" class="border px-4 py-2 rounded w-full"/>
+          <input type="text" name="price" placeholder="Product Price" class="border px-4 py-2 rounded w-full"/>
+          <input type="text" name="originalPrice" placeholder="Original Price" class="border px-4 py-2 rounded w-full"/>
+          <input type="text" name="discount" placeholder="Discount Price" class="border px-4 py-2 rounded w-full sm:col-span-2"/>
+        </div>
+      </section>
+
+      <!-- Panel Details -->
+      <section>
+        <h2 class="text-lg font-medium mb-4">Panel Details</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input type="text" name="color" placeholder="Iteam Color" class="border px-4 py-2 rounded w-full"/>
+          <input type="text" name="description" placeholder="About product" class="border px-4 py-2 rounded w-full"/>
+          <input type="text" name="textcolor" placeholder="Text Color" class="border px-4 py-2 rounded w-full sm:col-span-2"/>
+        </div>
+      </section>
+
+      <!-- Submit Button -->
+      <div>
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded">
+          Create New Product
+        </button>
+      </div>
+    </form>
+  </main>
+
+</body>
+</html>
