@@ -18,16 +18,28 @@
       <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <h1 class="text-xl font-bold text-purple-600">👜 Bagify</h1>
         <div class="flex-1 mx-4 hidden md:block">
-          <input
-            type="text"
-            placeholder="Search for bags..."
-            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-          />
+         <form action="/shop" method="GET" class="flex-1 mx-4 hidden md:block">
+  <input
+    type="text"
+    name="search"
+    value="<%= typeof search !== 'undefined' ? search : '' %>"
+    placeholder="Search for bags..."
+    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+  />
+</form>
+
         </div>
-        <div class="flex items-center space-x-4 text-sm">
-          <a href="#" class="hover:text-purple-600 hidden sm:inline">Login</a>
-          <a href="/cart" class="hover:text-purple-600">🛒 Cart</a>
-        </div>
+       <div class="flex items-center space-x-4 text-sm gap-4">
+  <img 
+    src="" 
+    alt="" 
+    class="w-8 h-8 rounded-full object-cover border border-gray-300"
+  >
+  <a href="#" class="hover:text-purple-600 hidden sm:inline"><%= user.name %></a>
+  
+  <a href="/cart" class="hover:text-purple-600">🛒 Cart</a>
+</div>
+
       </div>
     </header>
 
@@ -63,6 +75,7 @@
           <div>
             <h2 class="font-semibold mb-2">Categories</h2>
            <ul class="space-y-1 text-sm text-gray-700">
+              <li><a href="/shop" class="block hover:text-purple-600">All</a></li>
   <li><a href="/shop?category=New Collection" class="block hover:text-purple-600">New Collection</a></li>
   <li><a href="/shop?category=Handbags" class="block hover:text-purple-600">Handbags</a></li>
   <li><a href="/shop?category=Laptop Bags" class="block hover:text-purple-600">Laptop Bags</a></li>

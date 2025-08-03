@@ -15,19 +15,27 @@ router.get("/signin",(req,res)=>{
 
 
 router.get("/shop", isLoggedin, async (req, res) => {
+  let user = await userModel.findOne({email:req.user.email}).populate("cart");
+
     const category = req.query.category;
+    const search = req.query.search;
     let query = {};
 
     if (category) {
         query.category = category;
     }
 
+    if (search) {
+        query.name = { $regex: search, $options: "i" }; 
+    }
+
     let products = await productModel.find(query);
     let success = req.flash("success");
     let error = req.flash("error");
 
-    res.render("shop", { products, success, error });
+    res.render("shop", { products, success,user, error, search, category });
 });
+
 
 
 

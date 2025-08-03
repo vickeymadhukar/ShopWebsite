@@ -27,7 +27,6 @@ module.exports.registerUser = async function (req,res){
    let token = genrateToken(user);
    res.cookie("token",token)
    res.redirect("/shop")
-  res.send("user created sucussfully")
             
         }
 
