@@ -11,9 +11,11 @@ const productSchema = mongoose.Schema({
     color:String,
     description:String,
     originalPrice:String,
-
-
-
+     category: {  
+        type: String,
+        required: true,
+        enum: ["New Collection", "Handbags", "Laptop Bags", "Backpacks"] 
+    }
 });
 
 module.exports= mongoose.model("product",productSchema);

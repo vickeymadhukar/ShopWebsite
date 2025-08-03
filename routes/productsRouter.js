@@ -1,41 +1,38 @@
-const express=require('express');
-const router=express.Router();
-const model=require("../config/multer-config");
+const express = require('express');
+const router = express.Router(); // ✅ Ye line add karni thi
+
 const upload = require('../config/multer-config');
+const productModel = require("../models/product-model");
 
-const productModel=require("../models/product-model");
-
-
-router.post('/create',upload.single("image") ,async(req,res)=>{
-         try{
-               let {
-            name,
-            price,
-            discount,
-             color,
-            description,
-            originalPrice,
-
-            }=req.body;
-
-            let product= await productModel.create({
-            image:req.file.buffer,
+router.post('/create', upload.single("image"), async (req, res) => {
+    try {
+        let {
             name,
             price,
             discount,
             color,
             description,
             originalPrice,
+            category // Agar category add karni ho to
+        } = req.body;
 
-            });
-            req.flash("success","product created successfully");
-            res.redirect("/owners/admin")
+        let product = await productModel.create({
+            image: req.file.buffer,
+            name,
+            price,
+            discount,
+            color,
+            description,
+            originalPrice,
+            category // Agar category add karni ho to
+        });
 
-         }catch(err){
-            res.status(500).send({message:err.message})
-         }
+        req.flash("success", "Product created successfully");
+        res.redirect("/owners/admin");
 
-})
+    } catch (err) {
+        res.status(500).send({ message: err.message });
+    }
+});
 
-
-module.exports=router;
+module.exports = router; // ✅ Router export karna na bhoolo

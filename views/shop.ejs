@@ -14,7 +14,6 @@
   </head>
   <body class="h-full flex flex-col bg-gray-100">
 
-    <!-- HEADER -->
     <header class="bg-white shadow sticky top-0 z-50">
       <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <h1 class="text-xl font-bold text-purple-600">👜 Bagify</h1>
@@ -63,12 +62,12 @@
         <aside class="hidden md:block space-y-6">
           <div>
             <h2 class="font-semibold mb-2">Categories</h2>
-            <ul class="space-y-1 text-sm text-gray-700">
-              <li><a href="#" class="block hover:text-purple-600">New Collection</a></li>
-              <li><a href="#" class="block hover:text-purple-600">Handbags</a></li>
-              <li><a href="#" class="block hover:text-purple-600">Laptop Bags</a></li>
-              <li><a href="#" class="block hover:text-purple-600">Backpacks</a></li>
-            </ul>
+           <ul class="space-y-1 text-sm text-gray-700">
+  <li><a href="/shop?category=New Collection" class="block hover:text-purple-600">New Collection</a></li>
+  <li><a href="/shop?category=Handbags" class="block hover:text-purple-600">Handbags</a></li>
+  <li><a href="/shop?category=Laptop Bags" class="block hover:text-purple-600">Laptop Bags</a></li>
+  <li><a href="/shop?category=Backpacks" class="block hover:text-purple-600">Backpacks</a></li>
+</ul>
           </div>
           <div>
             <h2 class="font-semibold mb-2">Price</h2>
@@ -100,7 +99,7 @@
         <span class="text-xs text-green-600 font-bold"><%= discountPercent %>% off</span>
       </div>
       
-      <a href="/addtocart/<%= product._id %>" 
+      <a href="/addtocart/<%=product._id %>" 
    class="mt-2 w-full block text-center bg-purple-600 text-white text-sm py-1.5 rounded hover:bg-purple-700">
   Add to Cart
 </a>
