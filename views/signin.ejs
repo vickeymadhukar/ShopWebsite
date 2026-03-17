@@ -1,48 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Responsive Sign Up</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Bagify - Sign In</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fafafa; color: #111; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .glass-panel { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(16px); }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        premium: {
+                            50: '#fdfbf9',
+                            100: '#f8f4ec',
+                            200: '#eee5d5',
+                            300: '#e1d0b6',
+                            400: '#d0b691',
+                            500: '#bf996b',
+                            600: '#b28453',
+                            700: '#956842',
+                            800: '#7b573a',
+                            900: '#644731',
+                            950: '#362417',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-4">
+<body class="min-h-screen flex items-center justify-center bg-gray-50 px-4 sm:px-6 relative overflow-hidden">
 
-  <div class="w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
-    
-    <div class="w-full md:w-1/2 p-8 sm:p-10">
-      <h1 class="text-3xl font-bold mb-4 text-gray-800">Sign in</h1>
-      <p class="text-gray-600 mb-6 text-sm">Create an account to start posting jobs and build your remote team.</p>
-
-      <!-- Google Sign-in -->
-      <button class="w-full flex items-center justify-center py-2 mb-6 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-100 transition text-sm">
-        <img src="https://img.icons8.com/color/16/google-logo.png" class="mr-2"/>
-        Sign in with Google
-      </button>
-
-      <p class="text-gray-400 text-center text-sm mb-4">or sign in using email</p>
-
-      <form class="space-y-4" method="post" action="/users/login">
-        
-        <input name="email" type="email" placeholder="Email" class="w-full px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"/>
-        
-        <input name="password" type="password" placeholder="Password" class="w-full px-4 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"/>
-        
-      
-
-        <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-md font-semibold text-sm">sign in</button>
-      </form>
-
-      <p class="mt-6 text-xs text-gray-600 text-center">
-        froget password
-        <a href="/shop" class="text-purple-600 hover:underline">Sign up</a>
-      </p>
+    <!-- Decorative Elements -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-premium-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+        <div class="absolute top-1/2 -right-24 w-96 h-96 bg-gray-200 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
     </div>
 
-    <div class="hidden md:block md:w-1/2  bg-gradient-to-br from-purple-600 to-indigo-700 z-10 flex justify-start">
-      <img src="/images/zipper.png" alt="" class=" h-[100%] w-[288px] z-20  ml-[-28%] overflow-hidden " >
+    <!-- Auth Container -->
+    <div class="w-full max-w-5xl rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col md:flex-row relative z-10 glass-panel border border-white">
+        
+        <!-- Left Side (Form) -->
+        <div class="w-full md:w-1/2 p-10 sm:p-14 lg:p-16 flex flex-col justify-center bg-white">
+            
+            <a href="/shop" class="flex items-center gap-2 mb-10 group w-max">
+                <span class="text-xl group-hover:-translate-x-1 transition-transform">←</span>
+                <span class="font-serif font-semibold text-xl tracking-wide text-gray-900 group-hover:text-premium-700 transition-colors">Bagify</span>
+            </a>
+
+            <h1 class="text-3xl sm:text-4xl font-serif text-gray-900 mb-3">Welcome Back</h1>
+            <p class="text-gray-500 mb-8 font-light text-sm sm:text-base">Sign in to access your curated collection and exclusive offers.</p>
+
+            <button class="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all font-medium text-gray-700 text-sm shadow-sm group">
+                <img src="https://img.icons8.com/color/24/google-logo.png" alt="Google" class="w-5 h-5 group-hover:scale-110 transition-transform"/>
+                Continue with Google
+            </button>
+
+            <div class="flex items-center my-8">
+                <div class="flex-1 border-t border-gray-100"></div>
+                <span class="px-4 text-xs font-medium text-gray-400 uppercase tracking-widest">Or</span>
+                <div class="flex-1 border-t border-gray-100"></div>
+            </div>
+
+            <form class="space-y-5" method="post" action="/users/login">
+                <div class="space-y-1">
+                    <label for="email" class="text-xs font-semibold text-gray-600 uppercase tracking-wider ml-1">Email</label>
+                    <input id="email" name="email" type="email" placeholder="Enter your email" required class="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-black focus:bg-white transition-colors placeholder:text-gray-400"/>
+                </div>
+                
+                <div class="space-y-1">
+                    <div class="flex items-center justify-between ml-1">
+                        <label for="password" class="text-xs font-semibold text-gray-600 uppercase tracking-wider">Password</label>
+                    </div>
+                    <input id="password" name="password" type="password" placeholder="Enter your password" required class="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-black focus:bg-white transition-colors placeholder:text-gray-400"/>
+                </div>
+
+                <div class="flex items-center justify-between mt-2 flex-row-reverse">
+                    <a href="#" class="text-xs font-medium text-gray-500 hover:text-black hover:underline transition-colors">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="w-full bg-black text-white py-3.5 rounded-xl font-medium text-sm hover:bg-gray-900 transition-all shadow-[0_4px_14px_0_rgb(0,0,0,0.2)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.23)] hover:-translate-y-0.5 mt-4">
+                    Sign In
+                </button>
+            </form>
+
+            <p class="mt-8 text-sm text-gray-500 text-center font-light">
+                New to Bagify? 
+                <a href="/signup" class="font-medium text-black hover:underline underline-offset-4 decoration-2 decoration-premium-500 ml-1">Create an account</a>
+            </p>
+        </div>
+
+        <!-- Right Side (Image/Brand) -->
+        <div class="hidden md:flex md:w-1/2 bg-gray-900 relative items-center justify-center p-12 overflow-hidden">
+            <!-- Background Image overlay -->
+            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=1476&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-overlay"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
+            
+            <div class="relative z-10 text-center max-w-sm">
+                <span class="text-5xl mb-6 block">👜</span>
+                <h2 class="text-3xl font-serif text-white mb-4">Discover Your Signature Style</h2>
+                <p class="text-gray-300 font-light leading-relaxed">Join the exclusive community of bag lovers and elevate your everyday carry with our premium collections.</p>
+                
+                <div class="mt-12 flex justify-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-white"></div>
+                    <div class="w-2 h-2 rounded-full bg-white/30"></div>
+                    <div class="w-2 h-2 rounded-full bg-white/30"></div>
+                </div>
+            </div>
+        </div>
+        
     </div>
-  </div>
 
 </body>
 </html>
