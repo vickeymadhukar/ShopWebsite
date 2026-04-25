@@ -10,7 +10,8 @@ router.get("/",(req,res)=>{
 });
 
 router.get("/signin",(req,res)=>{
-  res.render("signin");
+  let error=req.flash("error");
+  res.render("signin", {error});
 })
 
 
@@ -65,6 +66,29 @@ router.get("/addtocart/:productid", isLoggedin, async (req, res) => {
 });
 
 
+router.get("/removefromcart/:index", isLoggedin, async (req, res) => {
+  try {
+    let user = await userModel.findOne({ email: req.user.email });
+    const index = parseInt(req.params.index);
+    
+    if (!isNaN(index) && index >= 0 && index < user.cart.length) {
+      user.cart.splice(index, 1);
+      await user.save();
+      req.flash("success", "Product removed from cart");
+    }
+    res.redirect("/cart");
+  } catch (error) {
+    console.error(error);
+    req.flash("error", "Error removing product");
+    res.redirect("/cart");
+  }
+});
 
+
+
+router.get("/settings", isLoggedin, async (req, res) => {
+  let user = await userModel.findOne({ email: req.user.email });
+  res.render("settings", { user });
+});
 
 module.exports=router;
